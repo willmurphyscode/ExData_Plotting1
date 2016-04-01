@@ -27,14 +27,30 @@ dat <- filter(dat, Date == day1 | Date == day2)
 
 ##Specify values for plotting 
 #Values shared by all plots
-width = 480
-height = 480
+plotWidth = 480
+plotHeight = 480
 
 
 #Values specific to plot1.png
 histogramColor = "red" 
 histrogramBreaks = 12
+xlabel = "Global Active Power (kilowatts)"
+ylabel = "Frequency"
+mainTitle = "Global Active Power" 
 
+##Wrap plot call in function
+doPlot <- function() {
+  hist(dat$Global_active_power, breaks = histrogramBreaks, col = histogramColor,
+       xlab = xlabel, ylab = ylabel, main = mainTitle, width = plotWidth, height = plotHeight)
+}
 
+##Preview
+doPlot()
 
+##Write File
+png(file = "plot1.png")
 
+doPlot()
+
+#Close file stream
+dev.off() 
